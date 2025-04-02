@@ -1,9 +1,11 @@
 package main
 
 import (
-	"fmt"
+    "pego/internal/game"
 )
 
 func main() {
+	g := game.NewGame()
 
+	g.Start()
 }
