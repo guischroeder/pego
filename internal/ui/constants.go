@@ -6,6 +6,6 @@ const (
 
 	ErrInvalidFormat     = "Invalid format. Use: row,column"
 	ErrInvalidPosition   = "Invalid position. Enter values within the board."
-	ErrInvalidDirection  = "Invalid direction. Choose between 0 and 3."
+	ErrInvalidDirection  = "Invalid direction. Choose between 0 and 3, or B to go back."
 	ErrInvalidBoardSize  = "Please enter an odd number between %d and %d."
 )

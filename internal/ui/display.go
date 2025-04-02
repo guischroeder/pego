@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-
-	"pego/internal/board"
 )
 
 func clearScreen() {
@@ -14,7 +12,7 @@ func clearScreen() {
 	cmd.Run()
 }
 
-func DisplayBoard(gameBoard [][]int) {
+func DisplayBoard(gameBoard [][]int, emptyCell, pegCell int) {
 	clearScreen()
 
 	rows := len(gameBoard)
@@ -45,9 +43,9 @@ func printBoardRows(gameBoard [][]int, rows, cols int) {
 
 func printCell(cellValue int) {
 	switch cellValue {
-	case board.EmptyCell:
+	case 0: // EmptyCell
 		fmt.Printf(" %s", EmptyCellSymbol)
-	case board.PegCell:
+	case 1: // PegCell
 		fmt.Printf(" %s", PegCellSymbol)
 	default:
 		fmt.Print("  ")

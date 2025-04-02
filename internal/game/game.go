@@ -10,12 +10,6 @@ const (
 	MaxBoardSize = 15
 )
 
-const (
-	DirectionUp    = 0
-	DirectionDown  = 1
-	DirectionLeft  = 2
-	DirectionRight = 3
-)
 
 type Game struct {
 	board *board.Board
@@ -48,17 +42,5 @@ func (g *Game) Start() {
 }
 
 func (g *Game) makeMove(row, col, direction int) {
-	var dx, dy int
-	switch direction {
-	case DirectionUp:
-		dx, dy = -1, 0
-	case DirectionDown:
-		dx, dy = 1, 0
-	case DirectionLeft:
-		dx, dy = 0, -1
-	case DirectionRight:
-		dx, dy = 0, 1
-	}
-
-	g.board.MakeMove(row, col, dx, dy)
+	g.board.MakeMove(row, col, direction)
 }

@@ -33,15 +33,23 @@ func GetMove(boardSize int) (int, int, int) {
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
-		fmt.Println("Enter the row and column of the peg you want to move (e.g., 3,4):")
-		input, _ := reader.ReadString('\n')
+		var row, col int
+		var valid bool
 
-		row, col, valid := parseCoordinates(strings.TrimSpace(input), boardSize)
-		if !valid {
-			continue
+		for {
+			fmt.Println("Enter the row and column of the peg you want to move (e.g., 3,4):")
+			input, _ := reader.ReadString('\n')
+
+			row, col, valid = parseCoordinates(strings.TrimSpace(input), boardSize)
+			if valid {
+				break
+			}
 		}
 
 		direction := getDirection(reader)
+		if direction == -2 {
+			continue
+		}
 		if direction == -1 {
 			continue
 		}
@@ -78,9 +86,16 @@ func getDirection(reader *bufio.Reader) int {
 	fmt.Println("1: Down")
 	fmt.Println("2: Left")
 	fmt.Println("3: Right")
+	fmt.Println("B: Back (to re-enter coordinates)")
 
 	input, _ := reader.ReadString('\n')
-	direction, err := strconv.Atoi(strings.TrimSpace(input))
+	trimmedInput := strings.TrimSpace(input)
+
+	if strings.ToUpper(trimmedInput) == "B" {
+		return -2
+	}
+
+	direction, err := strconv.Atoi(trimmedInput)
 
 	if err != nil || direction < board.DirectionUp || direction > board.DirectionRight {
 		fmt.Println(ErrInvalidDirection)
